@@ -20,7 +20,7 @@ public class DrawController {
     private Button add;
     @FXML
     private Button calc;
-    private int[][] matrix;
+    private double[][] matrix;
     private List[] list;
 
     static void setNodes(int n) {
@@ -115,11 +115,11 @@ public class DrawController {
             }
         }
         if (matrix == null) {
-            matrix = new int[nodes][nodes];
+            matrix = new double[nodes][nodes];
             list = new LinkedList[nodes];
             for (int i = 0; i < nodes; i++) {
                 list[i] = new LinkedList();
-                matrix[i] = new int[nodes];
+                matrix[i] = new double[nodes];
             }
         }
         for (int i = 0; i < parameters.length; i++) {
