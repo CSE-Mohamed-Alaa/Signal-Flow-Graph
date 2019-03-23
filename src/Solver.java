@@ -6,8 +6,10 @@ public class Solver {
 	private List[] adjList;
 	private List<List<Integer>> forwardPathList;
 	private List<List<Integer>> loopsList;
+	private List<String> allCombinations; 
+	private double[] deltaN;
+	private double deltaD;
 	
-
 	public List<List<Integer>> getForwardPathList() {
 		return forwardPathList;
 	}
@@ -15,18 +17,30 @@ public class Solver {
 	public List<List<Integer>> getLoopsList() {
 		return loopsList;
 	}
+	public List<String> getAllCombinations() {
+		return allCombinations;
+	}
+
+	public double[] getDeltaN() {
+		return deltaN;
+	}
+
+	public double getDeltaD() {
+		return deltaD;
+	}
 
 	public Solver(double[][] m, List[] list) {
 		adjMatrix = m;
 		adjList = list;
 		forwardPathList = new ArrayList<>();
 		loopsList = new ArrayList<>();
+		allCombinations = new ArrayList<>();
 	}
 
 	public double solve() {
 		getForwardPathsAndLoops(0, adjList.length - 1);
-		double deltaD = delta(loopsList);
-		double[] deltaN = new double[forwardPathList.size()];
+		deltaD = delta(loopsList);
+		deltaN = new double[forwardPathList.size()];
 		List<List<Integer>> tempLoops = new ArrayList<List<Integer>>();
 		for (int i = 0; i < forwardPathList.size(); i++) {
 			for (List<Integer> loop : loopsList) {
@@ -131,7 +145,7 @@ public class Solver {
 
 	private double delta(List<List<Integer>> loops) {
 		double totalGain = 0;
-		// max 32 loop because max value of int is 2^32-1
+		// max 32 loop because max value of int is (2^32)-1
 		int numOFCombinations = (int) Math.pow(2, loops.size());
 		// if 2 loops touched in any combination skip it
 		boolean twoTouched;
@@ -154,6 +168,7 @@ public class Solver {
 					break;
 			}
 			if (!twoTouched) {
+				allCombinations.add(getLoopCombination(i, loops.size()));
 				totalGain += calculateCombinationGain(i, loops);
 			}
 		}
@@ -196,7 +211,6 @@ public class Solver {
 			}
 			loopCombination = zeros.append(loopCombination).toString();
 		}
-
 		return loopCombination;
 	}
 
