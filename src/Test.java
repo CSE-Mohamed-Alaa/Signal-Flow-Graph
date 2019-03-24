@@ -23,6 +23,7 @@ public class Test {
 		takeInput(7, 4, -1);
 		takeInput(8, 6, -1);
 		takeInput(8, 9, 1);
+		takeInput(9, 8, 1);
 
 		// x[0].add(1);
 		// x[0].add(2);
