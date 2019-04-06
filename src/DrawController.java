@@ -1,17 +1,25 @@
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
 public class DrawController {
+    @FXML
+    BorderPane pane;
     @FXML
     TextArea textArea;
     @FXML
@@ -152,7 +160,20 @@ public class DrawController {
     @FXML
     private void solve() {
         Solver solver = new Solver(matrix, list);
-        output.setText(solver.solve() + "");
+        String result = solver.solve() + "";
+        output.setText(result);
+        showSteps(solver.getSteps(result));
+    }
+
+    void showSteps(String text) {
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initOwner((Stage) pane.getScene().getWindow());
+        VBox dialogVbox = new VBox(20);
+        dialogVbox.getChildren().add(new Text(text));
+        Scene dialogScene = new Scene(dialogVbox, 300, 200);
+        dialog.setScene(dialogScene);
+        dialog.show();
     }
 
     boolean checkAvailability(int[] arr) {

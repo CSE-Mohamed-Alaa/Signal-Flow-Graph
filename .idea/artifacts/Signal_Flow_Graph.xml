@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Signal Flow Graph">
+    <output-path>$PROJECT_DIR$/out/artifacts/Signal_Flow_Graph</output-path>
+    <root id="archive" name="Signal Flow Graph.jar" />
+  </artifact>
+</component>
