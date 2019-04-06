@@ -39,18 +39,19 @@ public class Solver {
 
 	public double solve() {
 		getForwardPathsAndLoops(0, adjList.length - 1);
-		deltaD = delta(loopsList);
 		deltaN = new double[forwardPathList.size()];
-		List<List<Integer>> tempLoops = new ArrayList<List<Integer>>();
 		for (int i = 0; i < forwardPathList.size(); i++) {
+			List<List<Integer>> tempLoops = new ArrayList<List<Integer>>();
 			for (List<Integer> loop : loopsList) {
 				if(!isTouchingEachOther(forwardPathList.get(i), loop)) {
 					tempLoops.add(loop);
 				}
 			}
 			deltaN[i] = delta(tempLoops);
+			allCombinations.clear();
 		}
-		
+		deltaD = delta(loopsList);
+
 		double overAllGain = 0;
 		//Summation of the numerator 
 		for (int i = 0; i < deltaN.length; i++) {
