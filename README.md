@@ -18,7 +18,7 @@ See "Signal Flow Graph Report.pdf" Page 3
 
 ## Authors
 
-* **Amr Khaled** []()
+* **Amr Khaled** [AmrGeneidy](https://github.com/AmrGeneidy)
 * **Mohamed Alaa** [CSE-Mohamed-Alaa](https://github.com/CSE-Mohamed-Alaa)
 
  
